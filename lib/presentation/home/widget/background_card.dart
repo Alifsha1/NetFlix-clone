@@ -13,9 +13,9 @@ class BackgroundCard extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 600,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(KmainImage),
+              image: NetworkImage(kmainImage),
             ),
           ),
         ),
@@ -28,12 +28,12 @@ class BackgroundCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CustomButtonWidget(
+                const CustomButtonWidget(
                   icon: Icons.add,
                   title: "My List",
                 ),
                 _playButton(),
-                CustomButtonWidget(
+                const CustomButtonWidget(
                   icon: Icons.info,
                   title: "Info",
                 ),
@@ -48,12 +48,12 @@ class BackgroundCard extends StatelessWidget {
         onPressed: () {},
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(kwhitecolor)),
-        icon: Icon(
+        icon: const Icon(
           Icons.play_arrow,
           size: 30,
         ),
-        label: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+        label: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: Text(
             'Play',
             style: TextStyle(fontSize: 20, color: kblackcolor),

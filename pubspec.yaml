@@ -29,10 +29,15 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   bordered_text: ^2.0.0
+  cached_network_image: ^3.3.1
+  carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_spinkit: ^5.2.1
   google_fonts: ^5.1.0
+  intl: ^0.19.0
+  shimmer: ^3.0.0
   video_player: ^2.8.3
 
 dev_dependencies:

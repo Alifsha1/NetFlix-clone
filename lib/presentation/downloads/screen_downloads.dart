@@ -14,18 +14,17 @@ class ScreenDownloads extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(50),
         child: AppBarWidget(
           title: 'Downloads',
         ),
       ),
       body: ListView.separated(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         itemBuilder: (ctx, index) => _widgetList[index],
-        separatorBuilder: (ctx, index) => SizedBox(
+        separatorBuilder: (ctx, index) => const SizedBox(
           height: 25,
         ),
         itemCount: _widgetList.length,
@@ -39,21 +38,21 @@ class Section2 extends StatelessWidget {
   final List imageList = [
     "https://media.themoviedb.org/t/p/w220_and_h330_face/7O4iVfOMQmdCSxhOg1WnzG1AgYT.jpg",
     "https://media.themoviedb.org/t/p/w220_and_h330_face/sphnjjiYb50SbWMToW7fyGigH1n.jpg",
-    "https://media.themoviedb.org/t/p/w220_and_h330_face/7O4iVfOMQmdCSxhOg1WnzG1AgYT.jpg",
+    'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/hXWBc0ioZP3cN4zCu6SN3YHXZVO.jpg',
   ];
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Text(
+        const Text(
           "Introducing downloads for you",
           textAlign: TextAlign.center,
           style: TextStyle(
               color: kwhitecolor, fontSize: 24, fontWeight: FontWeight.bold),
         ),
         kheight,
-        Text(
+        const Text(
           "We Will download a personalised selection of\nmovies and shows for you, so there's\nalways something to watch on your\ndevice ",
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.grey, fontSize: 16),
@@ -70,7 +69,7 @@ class Section2 extends StatelessWidget {
                 backgroundColor: Colors.grey.withOpacity(0.5),
               ),
               DownloadsImageWidget(
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   left: 170,
                   top: 50,
                 ),
@@ -79,13 +78,13 @@ class Section2 extends StatelessWidget {
                 size: Size(size.width * 0.35, size.width * 0.55),
               ),
               DownloadsImageWidget(
-                margin: EdgeInsets.only(right: 170, top: 50),
+                margin: const EdgeInsets.only(right: 170, top: 50),
                 imageList: imageList[1],
                 angle: -20,
                 size: Size(size.width * 0.35, size.width * 0.55),
               ),
               DownloadsImageWidget(
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   bottom: 35,
                   top: 50,
                 ),
@@ -115,8 +114,8 @@ class Section3 extends StatelessWidget {
             onPressed: () {},
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 "Set up",
                 style: TextStyle(
@@ -132,8 +131,8 @@ class Section3 extends StatelessWidget {
           color: kbuttoncolorwhite,
           onPressed: () {},
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
             child: Text(
               "See what you can download",
               style: TextStyle(
@@ -155,7 +154,7 @@ class _SmartDownloads extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: [
         kwidth,
         Icon(

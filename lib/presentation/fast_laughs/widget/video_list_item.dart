@@ -1,18 +1,50 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:netflix/assets/assets.dart';
 import 'package:netflix/core/colors/colors.dart';
-import 'package:netflix/core/constants.dart';
+import 'package:netflix/widget/video_play_widget.dart';
+import 'package:video_player/video_player.dart';
 
-class VideoListItem extends StatelessWidget {
+class VideoListItem extends StatefulWidget {
   final int index;
   const VideoListItem({super.key, required this.index});
+
+  @override
+  State<VideoListItem> createState() => _VideoListItemState();
+}
+
+class _VideoListItemState extends State<VideoListItem> {
+  VideoPlayerController? videoPlayerController;
+  bool isVolumeOn = true;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      videoPlayerController =
+          VideoPlayerController.networkUrl(Uri.parse(videoList[widget.index]));
+    });
+    videoPlayerController!.initialize();
+    videoPlayerController!.play();
+    videoPlayerController!.setVolume(5);
+    videoPlayerController!.setLooping(true);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    videoPlayerController!.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          color: Colors.accents[index % Colors.accents.length],
+        SizedBox.expand(
+          child: SizedBox(
+            width: videoPlayerController!.value.size.width,
+            height: videoPlayerController!.value.size.height,
+            child: VideoPlayer(videoPlayerController!),
+          ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -27,8 +59,13 @@ class VideoListItem extends StatelessWidget {
                   radius: 30,
                   backgroundColor: Colors.black.withOpacity(0.5),
                   child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
+                    onPressed: () {
+                      isVolumeOn == true
+                          ? videoPlayerController!.setVolume(0)
+                          : videoPlayerController!.setVolume(5);
+                      isVolumeOn = !isVolumeOn;
+                    },
+                    icon: const Icon(
                       Icons.volume_off,
                       size: 30,
                     ),
@@ -38,20 +75,21 @@ class VideoListItem extends StatelessWidget {
                 //right side
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       child: CircleAvatar(
                         radius: 30,
                         backgroundImage: NetworkImage(
-                          "https://media.themoviedb.org/t/p/w220_and_h330_face/7O4iVfOMQmdCSxhOg1WnzG1AgYT.jpg",
+                          imageList[widget.index],
                         ),
+                        backgroundColor: Colors.transparent,
                       ),
                     ),
-                    VideoActionWidget(icon: Icons.emoji_emotions, title: 'LOL'),
-                    VideoActionWidget(icon: Icons.add, title: 'My List'),
-                    VideoActionWidget(icon: Icons.share, title: 'Share'),
-                    VideoActionWidget(icon: Icons.play_arrow, title: 'Play'),
+                    const VideoActionWidget(icon: Icons.emoji_emotions, title: 'LOL'),
+                    const VideoActionWidget(icon: Icons.add, title: 'My List'),
+                    const VideoActionWidget(icon: Icons.share, title: 'Share'),
+                    VideoPlayWidget(playerController: videoPlayerController!),
                   ],
                 )
               ],
@@ -85,7 +123,7 @@ class VideoActionWidget extends StatelessWidget {
           ),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               color: kwhitecolor,
               fontSize: 14,
             ),

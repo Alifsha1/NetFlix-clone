@@ -17,12 +17,13 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: GoogleFonts.montserrat().fontFamily,
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
+          fontFamily: GoogleFonts.montserrat().fontFamily,
           scaffoldBackgroundColor: backgroundColor,
           primaryColor: Colors.blue,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
               .copyWith(background: backgroundColor),
-          textTheme: TextTheme(
+          textTheme: const TextTheme(
               titleLarge: TextStyle(color: Colors.white),
               bodyLarge: TextStyle(color: Colors.white),
               bodySmall: TextStyle(color: Colors.white),

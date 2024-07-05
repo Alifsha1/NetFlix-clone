@@ -4,9 +4,17 @@ import 'package:netflix/core/constants.dart';
 import 'package:netflix/presentation/search/widget/search_idle.dart';
 import 'package:netflix/presentation/search/widget/serach_result.dart';
 
-class ScreenSearch extends StatelessWidget {
+bool searchbarValue = false;
+
+class ScreenSearch extends StatefulWidget {
   const ScreenSearch({super.key});
 
+  @override
+  State<ScreenSearch> createState() => _ScreenSearchState();
+}
+
+class _ScreenSearchState extends State<ScreenSearch> {
+  String searchValue = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +25,23 @@ class ScreenSearch extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CupertinoSearchTextField(
+              onTap: () {
+                setState(() {
+                  searchbarValue = true;
+                });
+              },
+              onSubmitted: (value) {
+                setState(() {
+                  searchbarValue = false;
+                });
+              },
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  setState(() {
+                    searchValue = value;
+                  });
+                }
+              },
               backgroundColor: Colors.grey.withOpacity(0.4),
               prefixIcon: const Icon(
                 CupertinoIcons.search,
@@ -26,11 +51,16 @@ class ScreenSearch extends StatelessWidget {
                 CupertinoIcons.xmark_circle_fill,
                 color: Colors.grey,
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
             kheight,
-            // const Expanded(child:  SearchIdleWidget()),
-            const Expanded(child: SearchResultWidget())
+            Expanded(
+              child: searchbarValue
+                  ? const SearchIdleWidget()
+                  :  SearchResultWidget(
+                    searchValue: searchValue
+                  ),
+            ),
           ],
         ),
       )),

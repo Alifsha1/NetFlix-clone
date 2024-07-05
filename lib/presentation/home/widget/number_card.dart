@@ -1,11 +1,17 @@
 import 'package:bordered_text/bordered_text.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:netflix/core/constants.dart';
 
 class NumberCard extends StatelessWidget {
   final int index;
-  const NumberCard({super.key, required this.index});
+  // ignore: prefer_typing_uninitialized_variables
+  final image;
+  const NumberCard({
+    super.key,
+    required this.index,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +19,7 @@ class NumberCard extends StatelessWidget {
       children: [
         Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 40,
               height: 200,
             ),
@@ -21,11 +27,10 @@ class NumberCard extends StatelessWidget {
               width: 130,
               height: 200,
               decoration: BoxDecoration(
-                  borderRadius: Kradius10,
+                  borderRadius: kradius10,
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(
-                          "https://media.themoviedb.org/t/p/w300_and_h450_bestv2/d5NXSklXo0qyIYkgV94XAgMIckC.jpg"))),
+                      image: NetworkImage(image))),
             ),
           ],
         ),
@@ -37,7 +42,7 @@ class NumberCard extends StatelessWidget {
             strokeColor: Colors.white,
             child: Text(
               "${index + 1}",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 140,
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.none,
